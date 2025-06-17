@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
+    code, pre { font-family: 'Fira Code', monospace; }
+  </style>
+</head>
+<body class="bg-white text-[#111827]">
+  <div id="global-loader" class="fixed inset-0 flex items-center justify-center bg-white z-50"><div class="w-12 h-12 border-4 border-blue-200 border-t-[#1E3A8A] rounded-full animate-spin"></div></div>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm shadow-sm z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16 items-center">
+      <a href="index.html" class="text-xl font-bold text-[#1E3A8A]">Portfolio</a>
+      <div class="hidden md:flex space-x-8">
+        <a href="index.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">Home</a>
+        <a href="about.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">About</a>
+        <a href="projects.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">Projects</a>
+        <a href="blog.html" class="text-[#1E3A8A] font-medium">Blog</a>
+        <a href="contact.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">Contact</a>
+      </div>
+      <button class="md:hidden" aria-label="Toggle menu"><i class="fas fa-bars text-[#4B5563] text-xl"></i></button>
+    </div>
+  </nav>
+  <main class="pt-24 pb-16 max-w-4xl mx-auto px-4">
+    <h1 class="text-4xl font-bold text-[#1E3A8A] mb-12">Blog Articles</h1>
+    <div class="space-y-12">
+      <article class="bg-white rounded-lg shadow hover:shadow-xl transition duration-300 overflow-hidden p-8">
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="flex-1">
+            <h2 class="text-2xl font-bold mb-2">Building a Modern E-commerce Platform with React and Node.js</h2>
+            <div class="flex items-center text-[#4B5563] text-sm mb-4">
+              <time datetime="2024-03-15">2024-03-15</time>
+              <span class="mx-2">·</span>
+              <span>8 min read</span>
+            </div>
+            <p class="mb-4 text-[#4B5563]">A deep dive into building scalable e-commerce solutions using modern web technologies.</p>
+            <div class="flex gap-2 flex-wrap mb-4">
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">React</span>
+              <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs">Node.js</span>
+            </div>
+            <a href="blog-detail.html" class="text-[#1E3A8A] hover:underline transition duration-300">Read More</a>
+          </div>
+        </div>
+      </article>
+      <article class="bg-white rounded-lg shadow hover:shadow-xl transition duration-300 overflow-hidden p-8">
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="flex-1">
+            <h2 class="text-2xl font-bold mb-2">Effective Task Management for Developers</h2>
+            <div class="flex items-center text-[#4B5563] text-sm mb-4">
+              <time datetime="2024-02-10">2024-02-10</time>
+              <span class="mx-2">·</span>
+              <span>6 min read</span>
+            </div>
+            <p class="mb-4 text-[#4B5563]">Tips and tools for boosting productivity and managing tasks efficiently.</p>
+            <div class="flex gap-2 flex-wrap mb-4">
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Productivity</span>
+              <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Tools</span>
+            </div>
+            <a href="blog-detail.html" class="text-[#1E3A8A] hover:underline transition duration-300">Read More</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="flex justify-center mt-12">
+      <a href="#" class="px-8 py-3 bg-[#1E3A8A] text-white rounded-md shadow hover:bg-[#2563EB] transition">Load More</a>
+    </div>
+  </main>
+  <footer class="bg-gray-50 py-12 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center text-[#4B5563]">
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+  window.addEventListener('DOMContentLoaded',()=>{document.getElementById('global-loader').style.display='none';});
+  </script>
+</body>
+</html> 

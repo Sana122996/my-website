@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Scalable React Applications - Blog</title>
+    <meta name="description" content="Learn the best practices for building large-scale React applications, including state management, code splitting, and performance optimization techniques">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Prism.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        
+        /* Loading animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .loading.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Article content styling */
+        .article-content {
+            line-height: 1.8;
+        }
+        .article-content h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #111827;
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: #374151;
+        }
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        .article-content li {
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        .article-content blockquote {
+            border-left: 4px solid #3B82F6;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #6B7280;
+        }
+        .article-content code {
+            background-color: #F3F4F6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+        }
+        .article-content pre {
+            background-color: #1F2937;
+            color: #F9FAFB;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        .article-content pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-200 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-blue-900">
+                        <i class="fas fa-code mr-2"></i>DevPortfolio
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition-colors duration-200">Home</a>
+                        <a href="about.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium">About</a>
+                        <a href="projects.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="blog.html" class="text-blue-900 border-b-2 border-blue-900 px-3 py-2 text-sm font-medium">Blog</a>
+                        <a href="contact.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition-colors duration-200">Contact</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-gray-700 hover:text-blue-900 focus:outline-none focus:text-blue-900" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+                <a href="index.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">About</a>
+                <a href="projects.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Projects</a>
+                <a href="blog.html" class="text-blue-900 block px-3 py-2 text-base font-medium">Blog</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center loading">
+                <nav class="text-sm text-gray-600 mb-4">
+                    <a href="index.html" class="hover:text-blue-900">Home</a>
+                    <span class="mx-2">/</span>
+                    <a href="blog.html" class="hover:text-blue-900">Blog</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-blue-900">Building Scalable React Applications</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-6">Building Scalable React Applications</h1>
+                <p class="text-xl text-gray-600 mb-8">
+                    Learn the best practices for building large-scale React applications, including state management, code splitting, and performance optimization techniques.
+                </p>
+                <div class="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-600">
+                    <div class="flex items-center">
+                        <img src="assets/images/avatar-user.png" alt="Author" class="w-8 h-8 rounded-full mr-2" loading="lazy">
+                        <span>By Elaine Chau</span>
+                    </div>
+                    <span>•</span>
+                    <span>March 15, 2024</span>
+                    <span>•</span>
+                    <span>8 min read</span>
+                    <span>•</span>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">React</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-12">
+                <!-- Main Content -->
+                <article class="lg:col-span-3">
+                    <div class="article-content loading">
+                        <p class="text-lg text-gray-600 mb-8">
+                            Building scalable React applications requires careful consideration of architecture, state management, and performance optimization. In this comprehensive guide, we'll explore the best practices and patterns that will help you create maintainable and efficient React applications.
+                        </p>
+
+                        <h2>1. Project Structure and Organization</h2>
+                        <p>
+                            A well-organized project structure is the foundation of any scalable application. Here's a recommended structure for large React applications:
+                        </p>
+                        <pre><code class="language-javascript">src/
+├── components/
+│   ├── common/          # Reusable components
+│   ├── features/        # Feature-specific components
+│   └── layouts/         # Layout components
+├── hooks/               # Custom React hooks
+├── services/            # API calls and external services
+├── store/               # State management (Redux, Zustand, etc.)
+├── utils/               # Utility functions
+├── types/               # TypeScript type definitions
+└── pages/               # Page components</code></pre>
+
+                        <h2>2. State Management Strategies</h2>
+                        <p>
+                            For large applications, you'll need a robust state management solution. Here are the most popular options:
+                        </p>
+                        
+                        <h3>Redux Toolkit</h3>
+                        <p>
+                            Redux Toolkit is the official, opinionated way to write Redux logic. It simplifies common Redux use cases and includes useful defaults.
+                        </p>
+                        <pre><code class="language-javascript">import { createSlice } from '@reduxjs/toolkit';
+
+const userSlice = createSlice({
+  name: 'user',
+  initialState: {
+    profile: null,
+    isAuthenticated: false,
+  },
+  reducers: {
+    setUser: (state, action) => {
+      state.profile = action.payload;
+      state.isAuthenticated = true;
+    },
+    logout: (state) => {
+      state.profile = null;
+      state.isAuthenticated = false;
+    },
+  },
+});
+
+export const { setUser, logout } = userSlice.actions;
+export default userSlice.reducer;</code></pre>
+
+                        <h3>Zustand</h3>
+                        <p>
+                            Zustand is a lightweight state management solution that's gaining popularity for its simplicity and flexibility.
+                        </p>
+                        <pre><code class="language-javascript">import create from 'zustand';
+
+const useStore = create((set) => ({
+  user: null,
+  setUser: (user) => set({ user }),
+  logout: () => set({ user: null }),
+}));</code></pre>
+
+                        <h2>3. Code Splitting and Lazy Loading</h2>
+                        <p>
+                            Code splitting is essential for large applications to reduce the initial bundle size and improve loading performance.
+                        </p>
+                        <pre><code class="language-javascript">import React, { lazy, Suspense } from 'react';
+
+// Lazy load components
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Settings = lazy(() => import('./pages/Settings'));
+
+function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </Suspense>
+  );
+}</code></pre>
+
+                        <h2>4. Performance Optimization</h2>
+                        <p>
+                            React provides several tools for optimizing performance:
+                        </p>
+                        
+                        <h3>React.memo</h3>
+                        <p>
+                            Use React.memo to prevent unnecessary re-renders of components that receive the same props.
+                        </p>
+                        <pre><code class="language-javascript">const ExpensiveComponent = React.memo(({ data }) => {
+  return (
+    <div>
+      {data.map(item => (
+        <div key={item.id}>{item.name}</div>
+      ))}
+    </div>
+  );
+});</code></pre>
+
+                        <h3>useMemo and useCallback</h3>
+                        <p>
+                            Use these hooks to memoize expensive calculations and prevent unnecessary re-renders.
+                        </p>
+                        <pre><code class="language-javascript">const ExpensiveComponent = ({ items, onItemClick }) => {
+  const sortedItems = useMemo(() => {
+    return items.sort((a, b) => a.name.localeCompare(b.name));
+  }, [items]);
+
+  const handleClick = useCallback((id) => {
+    onItemClick(id);
+  }, [onItemClick]);
+
+  return (
+    <div>
+      {sortedItems.map(item => (
+        <button key={item.id} onClick={() => handleClick(item.id)}>
+          {item.name}
+        </button>
+      ))}
+    </div>
+  );
+};</code></pre>
+
+                        <h2>5. Error Boundaries</h2>
+                        <p>
+                            Implement error boundaries to catch JavaScript errors anywhere in the component tree and display a fallback UI.
+                        </p>
+                        <pre><code class="language-javascript">class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
+}</code></pre>
+
+                        <h2>6. Testing Strategy</h2>
+                        <p>
+                            A comprehensive testing strategy is crucial for maintaining code quality in large applications:
+                        </p>
+                        <ul>
+                            <li><strong>Unit Tests:</strong> Test individual components and functions</li>
+                            <li><strong>Integration Tests:</strong> Test component interactions</li>
+                            <li><strong>E2E Tests:</strong> Test complete user workflows</li>
+                            <li><strong>Visual Regression Tests:</strong> Ensure UI consistency</li>
+                        </ul>
+
+                        <h2>Conclusion</h2>
+                        <p>
+                            Building scalable React applications requires a combination of good architecture, proper state management, performance optimization, and comprehensive testing. By following these best practices, you'll create applications that are maintainable, performant, and ready for growth.
+                        </p>
+                        
+                        <blockquote>
+                            "The best code is no code at all. The second best code is code that's easy to understand and maintain."
+                        </blockquote>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="mt-12 pt-8 border-t border-gray-200 loading" style="animation-delay: 0.1s;">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Tags</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">React</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">JavaScript</span>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Performance</span>
+                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">Architecture</span>
+                        </div>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="mt-8 loading" style="animation-delay: 0.2s;">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Share this article</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                                <i class="fab fa-twitter text-white"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                                <i class="fab fa-linkedin text-white"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                                <i class="fab fa-facebook text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="space-y-8">
+                    <!-- Author Info -->
+                    <div class="bg-gray-50 rounded-lg p-6 loading" style="animation-delay: 0.3s;">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
+                        <div class="flex items-center mb-4">
+                            <img src="assets/images/avatar-user.png" alt="Elaine Chau" class="w-16 h-16 rounded-full mr-4" loading="lazy">
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Elaine Chau</h4>
+                                <p class="text-gray-600 text-sm">UI/UX Designer</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Passionate about React, Node.js, and building scalable web applications. 
+                            Loves sharing knowledge and helping others grow in their development journey.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-blue-600 hover:text-blue-800">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-blue-600 hover:text-blue-800">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="text-blue-600 hover:text-blue-800">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Table of Contents -->
+                    <div class="bg-gray-50 rounded-lg p-6 loading" style="animation-delay: 0.4s;">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Table of Contents</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#structure" class="text-gray-600 hover:text-blue-900 transition-colors">1. Project Structure and Organization</a></li>
+                            <li><a href="#state" class="text-gray-600 hover:text-blue-900 transition-colors">2. State Management Strategies</a></li>
+                            <li><a href="#splitting" class="text-gray-600 hover:text-blue-900 transition-colors">3. Code Splitting and Lazy Loading</a></li>
+                            <li><a href="#performance" class="text-gray-600 hover:text-blue-900 transition-colors">4. Performance Optimization</a></li>
+                            <li><a href="#errors" class="text-gray-600 hover:text-blue-900 transition-colors">5. Error Boundaries</a></li>
+                            <li><a href="#testing" class="text-gray-600 hover:text-blue-900 transition-colors">6. Testing Strategy</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Related Articles -->
+                    <div class="bg-gray-50 rounded-lg p-6 loading" style="animation-delay: 0.5s;">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Related Articles</h3>
+                        <div class="space-y-4">
+                            <article>
+                                <h4 class="font-medium text-gray-900 mb-2">
+                                    <a href="blog.html" class="hover:text-blue-900 transition-colors">API Design Best Practices</a>
+                                </h4>
+                                <p class="text-gray-600 text-sm">Discover the essential principles for designing RESTful APIs...</p>
+                            </article>
+                            <article>
+                                <h4 class="font-medium text-gray-900 mb-2">
+                                    <a href="blog.html" class="hover:text-blue-900 transition-colors">Modern CSS Techniques</a>
+                                </h4>
+                                <p class="text-gray-600 text-sm">Explore advanced CSS techniques for modern web development...</p>
+                            </article>
+                            <article>
+                                <h4 class="font-medium text-gray-900 mb-2">
+                                    <a href="blog.html" class="hover:text-blue-900 transition-colors">TypeScript Best Practices</a>
+                                </h4>
+                                <p class="text-gray-600 text-sm">Learn how to write better TypeScript code with these best practices...</p>
+                            </article>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Articles Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 loading">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">More Articles</h2>
+                <p class="text-xl text-gray-600">Continue reading with these related articles</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <img src="assets/images/project1.png" alt="API Design" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Node.js</span>
+                            <span class="text-gray-500 text-sm ml-4">March 10, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">API Design Best Practices</h3>
+                        <p class="text-gray-600 mb-4">
+                            Discover the essential principles for designing RESTful APIs that are scalable, maintainable, and developer-friendly.
+                        </p>
+                        <a href="blog.html" class="text-blue-600 hover:text-blue-800 font-medium">Read More</a>
+                    </div>
+                </article>
+                
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <img src="assets/images/project2.png" alt="CSS Techniques" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">CSS</span>
+                            <span class="text-gray-500 text-sm ml-4">March 5, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Modern CSS Techniques</h3>
+                        <p class="text-gray-600 mb-4">
+                            Explore advanced CSS techniques including Grid, Flexbox, and modern layout patterns for responsive design.
+                        </p>
+                        <a href="blog.html" class="text-blue-600 hover:text-blue-800 font-medium">Read More</a>
+                    </div>
+                </article>
+                
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <img src="assets/images/project3.png" alt="TypeScript" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">TypeScript</span>
+                            <span class="text-gray-500 text-sm ml-4">March 1, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">TypeScript Best Practices</h3>
+                        <p class="text-gray-600 mb-4">
+                            Learn how to write better TypeScript code with these best practices and advanced type patterns.
+                        </p>
+                        <a href="blog.html" class="text-blue-600 hover:text-blue-800 font-medium">Read More</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Get In Touch</h3>
+                    <div class="space-y-3">
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                            <a href="mailto:hello@example.com" class="hover:text-blue-400 transition-colors">hello@example.com</a>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-blue-400"></i>
+                            <a href="tel:+1234567890" class="hover:text-blue-400 transition-colors">+1 (234) 567-890</a>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-3 text-blue-400"></i>
+                            <span>San Francisco, CA</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-blue-400 transition-colors">About Me</a></li>
+                        <li><a href="projects.html" class="hover:text-blue-400 transition-colors">Projects</a></li>
+                        <li><a href="blog.html" class="hover:text-blue-400 transition-colors">Blog</a></li>
+                        <li><a href="contact.html" class="hover:text-blue-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social Media -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Follow Me</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p>&copy; 2024 Developer Portfolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Prism.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95');
+            } else {
+                navbar.classList.remove('bg-white/95');
+            }
+        });
+        
+        // Loading animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingElements = document.querySelectorAll('.loading');
+            loadingElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('loaded');
+                }, index * 100);
+            });
+        });
+        
+        // Smooth scroll for table of contents
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Platform - Project Detail</title>
+    <meta name="description" content="Detailed view of the E-commerce Platform project showcasing features, technologies, and implementation details">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        
+        /* Loading animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .loading.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-200 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-blue-900">
+                        <i class="fas fa-code mr-2"></i>DevPortfolio
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition-colors duration-200">Home</a>
+                        <a href="about.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium">About</a>
+                        <a href="projects.html" class="text-blue-900 border-b-2 border-blue-900 px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="blog.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition-colors duration-200">Blog</a>
+                        <a href="contact.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition-colors duration-200">Contact</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-gray-700 hover:text-blue-900 focus:outline-none focus:text-blue-900" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+                <a href="index.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">About</a>
+                <a href="projects.html" class="text-blue-900 block px-3 py-2 text-base font-medium">Projects</a>
+                <a href="blog.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Blog</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center loading">
+                <nav class="text-sm text-gray-600 mb-4">
+                    <a href="index.html" class="hover:text-blue-900">Home</a>
+                    <span class="mx-2">/</span>
+                    <a href="projects.html" class="hover:text-blue-900">Projects</a>
+                    <span class="mx-2">/</span>
+                    <span class="text-blue-900">E-commerce Platform</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-6">E-commerce Platform</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                    A modern, scalable e-commerce platform built with React and Node.js, featuring real-time inventory management, secure payment processing, and an intuitive admin dashboard.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium">React</span>
+                    <span class="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium">Node.js</span>
+                    <span class="bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium">MongoDB</span>
+                    <span class="bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium">Stripe</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-12">
+                <!-- Main Content -->
+                <div class="lg:col-span-2 space-y-12">
+                    <!-- Project Overview -->
+                    <div class="loading">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Project Overview</h2>
+                        <div class="prose prose-lg text-gray-600">
+                            <p class="mb-6">
+                                This e-commerce platform was developed to provide a comprehensive solution for online retail businesses. 
+                                The project encompasses both customer-facing and administrative interfaces, with a focus on performance, 
+                                security, and user experience.
+                            </p>
+                            <p class="mb-6">
+                                The platform features a modern, responsive design that works seamlessly across all devices. 
+                                Built with React on the frontend and Node.js on the backend, it leverages MongoDB for data storage 
+                                and integrates with Stripe for secure payment processing.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="loading" style="animation-delay: 0.1s;">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Key Features</h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-shopping-cart text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-gray-900">Shopping Cart</h3>
+                                </div>
+                                <p class="text-gray-600">Real-time cart management with persistent storage and guest checkout options.</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-credit-card text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-gray-900">Payment Processing</h3>
+                                </div>
+                                <p class="text-gray-600">Secure payment processing with Stripe integration and multiple payment methods.</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-chart-line text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-gray-900">Analytics Dashboard</h3>
+                                </div>
+                                <p class="text-gray-600">Comprehensive analytics and reporting for sales, inventory, and customer behavior.</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-users text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-gray-900">User Management</h3>
+                                </div>
+                                <p class="text-gray-600">Complete user registration, authentication, and profile management system.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Screenshots -->
+                    <div class="loading" style="animation-delay: 0.2s;">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Screenshots</h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <a href="assets/images/project1.png" data-lightbox="project-screenshots" class="block">
+                                <img src="assets/images/project1.png" alt="Homepage" class="w-full rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" loading="lazy">
+                            </a>
+                            <a href="assets/images/project2.png" data-lightbox="project-screenshots" class="block">
+                                <img src="assets/images/project2.png" alt="Product Page" class="w-full rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" loading="lazy">
+                            </a>
+                            <a href="assets/images/project3.png" data-lightbox="project-screenshots" class="block">
+                                <img src="assets/images/project3.png" alt="Admin Dashboard" class="w-full rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" loading="lazy">
+                            </a>
+                            <a href="assets/images/project1.png" data-lightbox="project-screenshots" class="block">
+                                <img src="assets/images/project1.png" alt="Mobile View" class="w-full rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" loading="lazy">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Technical Implementation -->
+                    <div class="loading" style="animation-delay: 0.3s;">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Technical Implementation</h2>
+                        <div class="bg-gray-900 rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="text-gray-400 text-sm code-font">Frontend Architecture</span>
+                            </div>
+                            <div class="text-green-400 code-font text-sm">
+                                <div class="mb-2"><span class="text-blue-400">//</span> React Component Structure</div>
+                                <div class="mb-2"><span class="text-purple-400">src/</span></div>
+                                <div class="ml-4 mb-2">├── <span class="text-yellow-400">components/</span></div>
+                                <div class="ml-8 mb-2">├── <span class="text-green-400">ProductCard.jsx</span></div>
+                                <div class="ml-8 mb-2">├── <span class="text-green-400">ShoppingCart.jsx</span></div>
+                                <div class="ml-8 mb-2">└── <span class="text-green-400">CheckoutForm.jsx</span></div>
+                                <div class="ml-4 mb-2">├── <span class="text-yellow-400">pages/</span></div>
+                                <div class="ml-8 mb-2">├── <span class="text-green-400">Home.jsx</span></div>
+                                <div class="ml-8 mb-2">├── <span class="text-green-400">Products.jsx</span></div>
+                                <div class="ml-8 mb-2">└── <span class="text-green-400">Admin.jsx</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-8">
+                    <!-- Project Info -->
+                    <div class="bg-gray-50 rounded-lg p-6 loading" style="animation-delay: 0.4s;">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Project Information</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="text-gray-600 text-sm">Client:</span>
+                                <p class="font-medium">E-commerce Startup</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-600 text-sm">Duration:</span>
+                                <p class="font-medium">6 months</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-600 text-sm">Team Size:</span>
+                                <p class="font-medium">3 developers</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-600 text-sm">Status:</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technologies Used -->
+                    <div class="bg-gray-50 rounded-lg p-6 loading" style="animation-delay: 0.5s;">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Technologies Used</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <i class="fab fa-react text-blue-600 mr-3"></i>
+                                <span>React 18</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fab fa-node-js text-green-600 mr-3"></i>
+                                <span>Node.js</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-database text-purple-600 mr-3"></i>
+                                <span>MongoDB</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fab fa-js text-yellow-600 mr-3"></i>
+                                <span>Express.js</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-credit-card text-blue-600 mr-3"></i>
+                                <span>Stripe API</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Links -->
+                    <div class="bg-gray-50 rounded-lg p-6 loading" style="animation-delay: 0.6s;">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Project Links</h3>
+                        <div class="space-y-3">
+                            <a href="#" class="flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Live Demo
+                            </a>
+                            <a href="#" class="flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+                                <i class="fab fa-github mr-2"></i>
+                                Source Code
+                            </a>
+                            <a href="#" class="flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+                                <i class="fas fa-file-alt mr-2"></i>
+                                Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Projects -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 loading">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Related Projects</h2>
+                <p class="text-xl text-gray-600">Check out some of my other projects</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <img src="assets/images/project2.png" alt="Task Management App" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Task Management App</h3>
+                        <p class="text-gray-600 mb-4">A collaborative task management application with real-time updates.</p>
+                        <a href="projects.html" class="text-blue-600 hover:text-blue-800 font-medium">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <img src="assets/images/project3.png" alt="Weather Dashboard" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Weather Dashboard</h3>
+                        <p class="text-gray-600 mb-4">A weather forecasting dashboard with interactive charts.</p>
+                        <a href="projects.html" class="text-blue-600 hover:text-blue-800 font-medium">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <img src="assets/images/project1.png" alt="Portfolio Website" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Portfolio Website</h3>
+                        <p class="text-gray-600 mb-4">A modern portfolio website built with React and Tailwind CSS.</p>
+                        <a href="projects.html" class="text-blue-600 hover:text-blue-800 font-medium">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Get In Touch</h3>
+                    <div class="space-y-3">
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                            <a href="mailto:hello@example.com" class="hover:text-blue-400 transition-colors">hello@example.com</a>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-blue-400"></i>
+                            <a href="tel:+1234567890" class="hover:text-blue-400 transition-colors">+1 (234) 567-890</a>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-3 text-blue-400"></i>
+                            <span>San Francisco, CA</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-blue-400 transition-colors">About Me</a></li>
+                        <li><a href="projects.html" class="hover:text-blue-400 transition-colors">Projects</a></li>
+                        <li><a href="blog.html" class="hover:text-blue-400 transition-colors">Blog</a></li>
+                        <li><a href="contact.html" class="hover:text-blue-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social Media -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Follow Me</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p>&copy; 2024 Developer Portfolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95');
+            } else {
+                navbar.classList.remove('bg-white/95');
+            }
+        });
+        
+        // Loading animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingElements = document.querySelectorAll('.loading');
+            loadingElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('loaded');
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html> 
