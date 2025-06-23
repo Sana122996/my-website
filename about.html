@@ -1,40 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Me - Portfolio</title>
+  <title>About Me - Developer Portfolio</title>
+  <meta name="description" content="Learn more about my background, skills, and experience as a developer">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
-    code, pre { font-family: 'Fira Code', monospace; }
+    .font-montserrat { font-family: 'Montserrat', sans-serif; }
+    .font-inter { font-family: 'Inter', sans-serif; }
+    .font-fira { font-family: 'Fira Code', monospace; }
+    * {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .dark {
+      color-scheme: dark;
+    }
+    .dark body {
+      background-color: #111827;
+      color: #f9fafb;
+    }
+    .dark .bg-white {
+      background-color: #1f2937 !important;
+    }
+    .dark .text-gray-900,
+    .dark .text-\[\#111827\] {
+      color: #fff !important;
+    }
+    .dark .text-gray-700,
+    .dark .text-\[\#4B5563\] {
+      color: #d1d5db !important;
+    }
+    .dark .text-gray-600 {
+      color: #9ca3af !important;
+    }
+    .dark .text-gray-500 {
+      color: #6b7280 !important;
+    }
+    .dark .border-gray-200 {
+      border-color: #374151 !important;
+    }
+    .dark .border-gray-300 {
+      border-color: #4b5563 !important;
+    }
+    .dark .shadow-lg {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    }
+    .dark .shadow-md {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+    .dark .shadow-sm {
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    }
+    .dark .bg-gray-50 {
+      background-color: #232a36 !important;
+    }
+    .dark .bg-gray-100 {
+      background-color: #374151 !important;
+    }
+    .dark .bg-blue-50 {
+      background-color: #1e3a8a;
+    }
+    .dark .bg-gradient-to-r {
+      background: linear-gradient(to right, #1e3a8a, #3b82f6);
+    }
+    .dark .bg-gradient-to-br {
+      background: linear-gradient(to bottom right, #1e3a8a, #3b82f6);
+    }
+    .theme-toggle {
+      position: relative;
+      width: 48px;
+      height: 24px;
+      background-color: #e5e7eb;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .dark .theme-toggle {
+      background-color: #374151;
+    }
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .dark .theme-toggle::after {
+      transform: translateX(24px);
+      background-color: #fbbf24;
+    }
+    .theme-toggle .sun-icon,
+    .theme-toggle .moon-icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      transition: opacity 0.3s ease;
+    }
+    .theme-toggle .sun-icon {
+      left: 6px;
+      color: #f59e0b;
+      opacity: 1;
+    }
+    .theme-toggle .moon-icon {
+      right: 6px;
+      color: #6b7280;
+      opacity: 0;
+    }
+    .dark .theme-toggle .sun-icon {
+      opacity: 0;
+    }
+    .dark .theme-toggle .moon-icon {
+      opacity: 1;
+      color: #fbbf24;
+    }
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #1e3a8a;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    .dark .loading {
+      border: 3px solid #374151;
+      border-top: 3px solid #3b82f6;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .image-placeholder {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+    .dark .image-placeholder {
+      background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+      background-size: 200% 100%;
+    }
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .dark h1, .dark h2, .dark h3, .dark h4, .dark .text-\[\#1E3A8A\] {
+      color: #fff !important;
+    }
+    .dark .card-shadow,
+    .dark .faq-card {
+      background-color: #232a36 !important;
+      box-shadow: 0 4px 12px 0 rgba(0,0,0,0.4);
+    }
+    .dark .text-\[\#1E3A8A\] {
+      color: #60a5fa !important;
+    }
+    .dark .text-blue-900,
+    .dark .text-blue-800 {
+      color: #60a5fa !important;
+    }
+    .dark .hover\:text-\[\#1E3A8A\]:hover {
+      color: #3b82f6 !important;
+    }
+    .dark .bg-\[\#1E3A8A\] {
+      background-color: #2563eb !important;
+    }
+    .dark .hover\:bg-\[\#2563EB\]:hover {
+      background-color: #3b82f6 !important;
+    }
+    .dark input,
+    .dark textarea {
+      background-color: #232a36 !important;
+      color: #f9fafb !important;
+      border-color: #374151 !important;
+    }
+    .dark input:focus,
+    .dark textarea:focus {
+      border-color: #60a5fa !important;
+      box-shadow: 0 0 0 2px #3b82f6;
+    }
+    .dark .text-red-500 {
+      color: #f87171 !important;
+    }
+    .dark .text-green-600 {
+      color: #34d399 !important;
+    }
   </style>
 </head>
-<body class="bg-white text-[#111827]">
+<body class="font-inter bg-white text-gray-900 dark:text-gray-100">
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm shadow-sm z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16 items-center">
-      <a href="index.html" class="text-xl font-bold text-[#1E3A8A]">Portfolio</a>
-      <div class="hidden md:flex space-x-8">
-        <a href="index.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">Home</a>
-        <a href="about.html" class="text-[#1E3A8A] font-medium">About</a>
-        <a href="projects.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">Projects</a>
-        <a href="blog.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">Blog</a>
-        <a href="contact.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">Contact</a>
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 dark:bg-gray-900/90 dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <a href="index.html" class="font-montserrat font-bold text-xl text-blue-900 dark:text-blue-100">
+            <i class="fas fa-code mr-2"></i>DevPortfolio
+          </a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-8">
+            <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">Home</a>
+            <a href="about.html" class="text-blue-900 dark:text-blue-100 border-b-2 border-blue-900 dark:border-blue-100 px-3 py-2 text-sm font-medium">About</a>
+            <a href="projects.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">Projects</a>
+            <a href="blog.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">Blog</a>
+            <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+          </div>
+        </div>
+        
+        <!-- Theme Toggle and Mobile Menu Button -->
+        <div class="flex items-center space-x-4">
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+            <i class="fas fa-sun sun-icon"></i>
+            <i class="fas fa-moon moon-icon"></i>
+          </button>
+          
+          <!-- Mobile menu button -->
+          <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 focus:outline-none focus:text-blue-900 dark:focus:text-blue-100">
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
       </div>
-      <button class="md:hidden" aria-label="Toggle menu"><i class="fas fa-bars text-[#4B5563] text-xl"></i></button>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">Home</a>
+        <a href="about.html" class="text-blue-900 dark:text-blue-100 block px-3 py-2 text-base font-medium">About</a>
+        <a href="projects.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">Projects</a>
+        <a href="blog.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">Blog</a>
+        <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">Contact</a>
+      </div>
     </div>
   </nav>
   <main class="pt-24 pb-16 max-w-4xl mx-auto px-4">
     <!-- Hero Section -->
     <section class="flex flex-col md:flex-row items-center gap-12 mb-16">
       <div class="flex-1 space-y-6">
-        <h1 class="text-4xl md:text-5xl font-bold text-[#1E3A8A]">About Me</h1>
-        <h2 class="text-xl text-[#4B5563]">UI/UX Designer & Creative Professional</h2>
-        <p class="text-lg text-[#111827]">I am Elaine Chau, a passionate designer with a strong background in digital design, always eager to learn and create impactful visual experiences. My expertise covers both UI/UX design and creative direction, with a focus on user-centered design and modern design principles.</p>
+        <h1 class="text-4xl md:text-5xl font-bold text-blue-900 dark:text-white">About Me</h1>
+        <h2 class="text-xl text-gray-600 dark:text-gray-300">UI/UX Designer & Creative Professional</h2>
+        <p class="text-lg text-gray-900 dark:text-gray-100">I am Elaine Chau, a passionate designer with a strong background in digital design, always eager to learn and create impactful visual experiences. My expertise covers both UI/UX design and creative direction, with a focus on user-centered design and modern design principles.</p>
         <div class="flex flex-wrap gap-3 mt-4">
           <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">UI/UX Design</span>
           <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Figma</span>
@@ -54,10 +275,78 @@
   </main>
   <footer class="bg-gray-50 py-12 mt-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center text-[#4B5563]">
+      <div class="text-center text-gray-600 dark:text-gray-300">
         <p>&copy; 2024 Elaine Chau. All rights reserved.</p>
       </div>
     </div>
   </footer>
+  
+  <!-- Custom JS -->
+  <script>
+    // Theme management
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference or default to system preference
+    const getStoredTheme = () => localStorage.getItem('theme');
+    const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    
+    // Apply theme
+    const applyTheme = (theme) => {
+      if (theme === 'dark') {
+        html.classList.remove('light');
+        html.classList.add('dark');
+      } else {
+        html.classList.remove('dark');
+        html.classList.add('light');
+      }
+    };
+    
+    // Initialize theme
+    const initializeTheme = () => {
+      const storedTheme = getStoredTheme();
+      const systemTheme = getSystemTheme();
+      const theme = storedTheme || systemTheme;
+      applyTheme(theme);
+    };
+    
+    // Toggle theme
+    const toggleTheme = () => {
+      const currentTheme = html.classList.contains('dark') ? 'light' : 'dark';
+      applyTheme(currentTheme);
+      localStorage.setItem('theme', currentTheme);
+    };
+    
+    // Event listeners
+    themeToggle.addEventListener('click', toggleTheme);
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!getStoredTheme()) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+    
+    // Initialize theme on page load
+    initializeTheme();
+    
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-white/95', 'dark:bg-gray-900/95');
+      } else {
+        navbar.classList.remove('bg-white/95', 'dark:bg-gray-900/95');
+      }
+    });
+  </script>
 </body>
 </html> 

@@ -1,72 +1,289 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Elaine Chau</title>
+    <title>Projects - Developer Portfolio</title>
+    <meta name="description" content="Explore my latest projects and creative work in UI/UX design and development">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+    
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
-        code, pre { font-family: 'Fira Code', monospace; }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1E3A8A',
-                        secondary: '#3B82F6',
-                        dark: '#111827',
-                        gray: {
-                            light: '#E5E7EB',
-                            DEFAULT: '#4B5563',
-                            dark: '#374151'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Montserrat', 'sans-serif']
-                    }
-                }
-            }
+        /* Custom styles */
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-fira { font-family: 'Fira Code', monospace; }
+        
+        /* Smooth transitions for theme switching */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
-    </script>
+        
+        /* Dark mode styles */
+        .dark {
+            color-scheme: dark;
+        }
+        
+        .dark body {
+            background-color: #111827;
+            color: #f9fafb;
+        }
+        
+        .dark .bg-white {
+            background-color: #1f2937 !important;
+        }
+        
+        .dark .text-gray-900,
+        .dark .text-\[\#111827\] {
+            color: #fff !important;
+        }
+        
+        .dark .text-gray-700,
+        .dark .text-\[\#4B5563\] {
+            color: #d1d5db !important;
+        }
+        
+        .dark .text-gray-600 {
+            color: #9ca3af !important;
+        }
+        
+        .dark .text-gray-500 {
+            color: #6b7280 !important;
+        }
+        
+        .dark .border-gray-200 {
+            border-color: #374151 !important;
+        }
+        
+        .dark .border-gray-300 {
+            border-color: #4b5563;
+        }
+        
+        .dark .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark .bg-gray-50 {
+            background-color: #374151;
+        }
+        
+        .dark .bg-gray-100 {
+            background-color: #4b5563;
+        }
+        
+        .dark .bg-blue-50 {
+            background-color: #1e3a8a;
+        }
+        
+        .dark .bg-gradient-to-r {
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+        }
+        
+        .dark .bg-gradient-to-br {
+            background: linear-gradient(to bottom right, #1e3a8a, #3b82f6);
+        }
+        
+        /* Theme toggle button styles */
+        .theme-toggle {
+            position: relative;
+            width: 48px;
+            height: 24px;
+            background-color: #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dark .theme-toggle {
+            background-color: #374151;
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .theme-toggle::after {
+            transform: translateX(24px);
+            background-color: #fbbf24;
+        }
+        
+        .theme-toggle .sun-icon,
+        .theme-toggle .moon-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .theme-toggle .sun-icon {
+            left: 6px;
+            color: #f59e0b;
+            opacity: 1;
+        }
+        
+        .theme-toggle .moon-icon {
+            right: 6px;
+            color: #6b7280;
+            opacity: 0;
+        }
+        
+        .dark .theme-toggle .sun-icon {
+            opacity: 0;
+        }
+        
+        .dark .theme-toggle .moon-icon {
+            opacity: 1;
+            color: #fbbf24;
+        }
+        
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1e3a8a;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .dark .loading {
+            border: 3px solid #374151;
+            border-top: 3px solid #3b82f6;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Image placeholder */
+        .image-placeholder {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        .dark .image-placeholder {
+            background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+            background-size: 200% 100%;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .dark h1, .dark h2, .dark h3, .dark h4, .dark .text-[#1E3A8A] {
+            color: #fff !important;
+        }
+        
+        .dark .tab-btn {
+            color: #fff !important;
+        }
+        
+        .dark .my-projects-title {
+            color: #fff !important;
+        }
+    </style>
 </head>
-<body class="bg-white text-[#111827]">
+<body class="font-inter bg-white text-gray-900 dark:text-gray-100">
+    <!-- Global Loader -->
+    <div id="global-loader" class="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50">
+    </div>
+
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm shadow-sm z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16 items-center">
-            <a href="index.html" class="text-xl font-bold text-[#1E3A8A]">Elaine Chau</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="index.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">Home</a>
-                <a href="about.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">About</a>
-                <a href="projects.html" class="text-[#1E3A8A] font-medium">Projects</a>
-                <a href="blog.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">Blog</a>
-                <a href="contact.html" class="text-[#4B5563] hover:text-[#1E3A8A] transition-colors">Contact</a>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 dark:bg-gray-900/90 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="font-montserrat font-bold text-xl text-blue-900 dark:text-blue-100">
+                        <i class="fas fa-code mr-2"></i>DevPortfolio
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">About</a>
+                        <a href="projects.html" class="text-blue-900 dark:text-blue-100 border-b-2 border-blue-900 dark:border-blue-100 px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="blog.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">Blog</a>
+                        <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+                
+                <!-- Theme Toggle and Mobile Menu Button -->
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <i class="fas fa-moon moon-icon"></i>
+                    </button>
+                    
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 focus:outline-none focus:text-blue-900 dark:focus:text-blue-100">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <!-- Mobile menu button -->
-            <button class="md:hidden" aria-label="Toggle menu">
-                <i class="fas fa-bars text-[#4B5563] text-xl"></i>
-            </button>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">Home</a>
+                <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">About</a>
+                <a href="projects.html" class="text-blue-900 dark:text-blue-100 block px-3 py-2 text-base font-medium">Projects</a>
+                <a href="blog.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">Blog</a>
+                <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">Contact</a>
+            </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="pt-24 pb-16 max-w-7xl mx-auto px-4">
-        <h1 class="text-4xl md:text-5xl font-bold text-[#1E3A8A] mb-8 text-center">My Projects</h1>
+        <h1 class="my-projects-title text-4xl md:text-5xl font-bold text-blue-900 dark:text-white mb-8 text-center">My Projects</h1>
         <!-- Tabs -->
         <div class="flex flex-wrap justify-center gap-4 mb-12">
-            <button class="tab-btn px-6 py-2 rounded-full font-semibold text-[#1E3A8A] bg-blue-50 hover:bg-blue-100 transition" data-tab="infographic">Infographic Design</button>
-            <button class="tab-btn px-6 py-2 rounded-full font-semibold text-[#1E3A8A] bg-blue-50 hover:bg-blue-100 transition" data-tab="ui">UI Design</button>
-            <button class="tab-btn px-6 py-2 rounded-full font-semibold text-[#1E3A8A] bg-blue-50 hover:bg-blue-100 transition" data-tab="vi">VI Design</button>
-            <button class="tab-btn px-6 py-2 rounded-full font-semibold text-[#1E3A8A] bg-blue-50 hover:bg-blue-100 transition" data-tab="ecommerce">E-commerce Design</button>
-            <button class="tab-btn px-6 py-2 rounded-full font-semibold text-[#1E3A8A] bg-blue-50 hover:bg-blue-100 transition" data-tab="brochure">Brochure Design</button>
+            <button class="tab-btn px-6 py-2 rounded-full font-semibold text-blue-900 dark:text-white bg-blue-50 hover:bg-blue-100 transition" data-tab="infographic">Infographic Design</button>
+            <button class="tab-btn px-6 py-2 rounded-full font-semibold text-blue-900 dark:text-white bg-blue-50 hover:bg-blue-100 transition" data-tab="ui">UI Design</button>
+            <button class="tab-btn px-6 py-2 rounded-full font-semibold text-blue-900 dark:text-white bg-blue-50 hover:bg-blue-100 transition" data-tab="vi">VI Design</button>
+            <button class="tab-btn px-6 py-2 rounded-full font-semibold text-blue-900 dark:text-white bg-blue-50 hover:bg-blue-100 transition" data-tab="ecommerce">E-commerce Design</button>
+            <button class="tab-btn px-6 py-2 rounded-full font-semibold text-blue-900 dark:text-white bg-blue-50 hover:bg-blue-100 transition" data-tab="brochure">Brochure Design</button>
         </div>
         <!-- Project Grids -->
         <div id="tab-infographic" class="tab-content grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -74,21 +291,21 @@
                 <img src="assets/images/project-infographic-1.png" alt="Infographic A" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Infographic A</h3>
-                    <p class="text-gray-600 mb-2">A visually engaging infographic presenting complex data in a clear, creative way.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A visually engaging infographic presenting complex data in a clear, creative way.</p>
                 </div>
             </a>
             <a href="project-infographic-2.html" class="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <img src="assets/images/project-infographic-2.png" alt="Infographic B" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Infographic B</h3>
-                    <p class="text-gray-600 mb-2">A modern infographic design for business analytics and reporting.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A modern infographic design for business analytics and reporting.</p>
                 </div>
             </a>
             <a href="project-infographic-3.html" class="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <img src="assets/images/project-infographic-3.png" alt="Infographic C" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Infographic C</h3>
-                    <p class="text-gray-600 mb-2">Creative infographic for educational content and visual storytelling.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">Creative infographic for educational content and visual storytelling.</p>
                 </div>
             </a>
         </div>
@@ -97,21 +314,21 @@
                 <img src="assets/images/project-ui-1.png" alt="App UI Redesign" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">App UI Redesign</h3>
-                    <p class="text-gray-600 mb-2">A fresh redesign of a mobile app interface for better usability and style.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A fresh redesign of a mobile app interface for better usability and style.</p>
                 </div>
             </a>
             <a href="project-ui-2.html" class="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <img src="assets/images/project-ui-2.png" alt="Dashboard Concept" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Dashboard Concept</h3>
-                    <p class="text-gray-600 mb-2">A modern dashboard UI concept for data visualization and management.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A modern dashboard UI concept for data visualization and management.</p>
                 </div>
             </a>
             <a href="project-ui-3.html" class="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <img src="assets/images/project-ui-3.png" alt="Mobile UI Kit" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Mobile UI Kit</h3>
-                    <p class="text-gray-600 mb-2">A comprehensive mobile UI kit for rapid prototyping and design systems.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A comprehensive mobile UI kit for rapid prototyping and design systems.</p>
                 </div>
             </a>
         </div>
@@ -120,21 +337,21 @@
                 <img src="assets/images/project-vi-1.png" alt="Brand Identity X" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Brand Identity X</h3>
-                    <p class="text-gray-600 mb-2">A complete visual identity system for a modern brand.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A complete visual identity system for a modern brand.</p>
                 </div>
             </a>
             <a href="project-vi-2.html" class="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <img src="assets/images/project-vi-2.png" alt="Logo Collection" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Logo Collection</h3>
-                    <p class="text-gray-600 mb-2">A curated collection of creative logo designs for various industries.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A curated collection of creative logo designs for various industries.</p>
                 </div>
             </a>
             <a href="project-vi-3.html" class="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <img src="assets/images/project-vi-3.png" alt="Visual System Pro" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Visual System Pro</h3>
-                    <p class="text-gray-600 mb-2">A professional visual system for consistent brand communication.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A professional visual system for consistent brand communication.</p>
                 </div>
             </a>
         </div>
@@ -143,21 +360,21 @@
                 <img src="assets/images/project-ecommerce-1.png" alt="Shop Platform UX" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Shop Platform UX</h3>
-                    <p class="text-gray-600 mb-2">A user-centered e-commerce platform with seamless shopping experience.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A user-centered e-commerce platform with seamless shopping experience.</p>
                 </div>
             </a>
             <a href="project-ecommerce-2.html" class="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <img src="assets/images/project-ecommerce-2.png" alt="Fashion Store UI" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Fashion Store UI</h3>
-                    <p class="text-gray-600 mb-2">A stylish UI design for a modern online fashion store.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A stylish UI design for a modern online fashion store.</p>
                 </div>
             </a>
             <a href="project-ecommerce-3.html" class="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <img src="assets/images/project-ecommerce-3.png" alt="Electronics Mall" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Electronics Mall</h3>
-                    <p class="text-gray-600 mb-2">A clean and functional e-commerce UI for electronics retail.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A clean and functional e-commerce UI for electronics retail.</p>
                 </div>
             </a>
         </div>
@@ -166,21 +383,21 @@
                 <img src="assets/images/project-brochure-1.png" alt="Product Brochure" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Product Brochure</h3>
-                    <p class="text-gray-600 mb-2">A product brochure design for effective marketing and communication.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A product brochure design for effective marketing and communication.</p>
                 </div>
             </a>
             <a href="project-brochure-2.html" class="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <img src="assets/images/project-brochure-2.png" alt="Event Booklet" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Event Booklet</h3>
-                    <p class="text-gray-600 mb-2">A creative booklet design for events and conferences.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A creative booklet design for events and conferences.</p>
                 </div>
             </a>
             <a href="project-brochure-3.html" class="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
                 <img src="assets/images/project-brochure-3.png" alt="Service Catalog" class="w-full h-48 object-cover" loading="lazy">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold mb-2">Service Catalog</h3>
-                    <p class="text-gray-600 mb-2">A well-organized catalog design for service offerings.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-2">A well-organized catalog design for service offerings.</p>
                 </div>
             </a>
         </div>
@@ -189,7 +406,7 @@
     <!-- Footer -->
     <footer class="bg-gray-50 py-12 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center text-[#4B5563]">
+            <div class="text-center text-gray-600 dark:text-gray-300">
                 <p>&copy; 2024 Elaine Chau. All rights reserved.</p>
             </div>
         </div>
@@ -216,19 +433,71 @@
 
     <!-- JavaScript -->
     <script>
+        // Theme management
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to system preference
+        const getStoredTheme = () => localStorage.getItem('theme');
+        const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        
+        // Apply theme
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                html.classList.remove('light');
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+                html.classList.add('light');
+            }
+        };
+        
+        // Initialize theme
+        const initializeTheme = () => {
+            const storedTheme = getStoredTheme();
+            const systemTheme = getSystemTheme();
+            const theme = storedTheme || systemTheme;
+            applyTheme(theme);
+        };
+        
+        // Toggle theme
+        const toggleTheme = () => {
+            const currentTheme = html.classList.contains('dark') ? 'light' : 'dark';
+            applyTheme(currentTheme);
+            localStorage.setItem('theme', currentTheme);
+        };
+        
+        // Event listeners
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!getStoredTheme()) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+        
+        // Initialize theme on page load
+        initializeTheme();
+        
         // Mobile menu toggle
-        const mobileMenuButton = document.querySelector('button[aria-label="Toggle menu"]');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        const closeMenuButton = mobileMenu.querySelector('button[aria-label="Close menu"]');
-
+        
         mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.toggle('hidden');
         });
-
-        closeMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95', 'dark:bg-gray-900/95');
+            } else {
+                navbar.classList.remove('bg-white/95', 'dark:bg-gray-900/95');
+            }
         });
-
+        
         // Tab switching
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -248,6 +517,8 @@
         });
         // 默认选中第一个tab
         tabBtns[0].classList.add('bg-blue-200', 'font-bold');
+
+        window.addEventListener('DOMContentLoaded',()=>{document.getElementById('global-loader').style.display='none';});
     </script>
 </body>
 </html> 

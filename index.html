@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,14 +21,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
     
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
-        }
-        .code-font {
-            font-family: 'Fira Code', monospace;
+        /* Custom styles */
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-fira { font-family: 'Fira Code', monospace; }
+        
+        /* Smooth transitions for theme switching */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         
         /* Loading animation */
@@ -61,16 +61,166 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #2563EB;
         }
+        
+        /* Dark mode styles */
+        .dark {
+            color-scheme: dark;
+        }
+        
+        .dark body {
+            background-color: #111827;
+            color: #f9fafb;
+        }
+        
+        .dark .bg-white {
+            background-color: #1f2937;
+        }
+        
+        .dark .text-gray-900 {
+            color: #f9fafb;
+        }
+        
+        .dark .text-gray-700 {
+            color: #d1d5db;
+        }
+        
+        .dark .text-gray-600 {
+            color: #9ca3af;
+        }
+        
+        .dark .text-gray-500 {
+            color: #6b7280;
+        }
+        
+        .dark .border-gray-200 {
+            border-color: #374151;
+        }
+        
+        .dark .border-gray-300 {
+            border-color: #4b5563;
+        }
+        
+        .dark .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark .bg-gray-50 {
+            background-color: #374151;
+        }
+        
+        .dark .bg-gray-100 {
+            background-color: #4b5563;
+        }
+        
+        .dark .bg-blue-50 {
+            background-color: #1e3a8a;
+        }
+        
+        .dark .bg-gradient-to-r {
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+        }
+        
+        .dark .bg-gradient-to-br {
+            background: linear-gradient(to bottom right, #1e3a8a, #3b82f6);
+        }
+        
+        /* Theme toggle button styles */
+        .theme-toggle {
+            position: relative;
+            width: 48px;
+            height: 24px;
+            background-color: #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dark .theme-toggle {
+            background-color: #374151;
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .theme-toggle::after {
+            transform: translateX(24px);
+            background-color: #fbbf24;
+        }
+        
+        .theme-toggle .sun-icon,
+        .theme-toggle .moon-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .theme-toggle .sun-icon {
+            left: 6px;
+            color: #f59e0b;
+            opacity: 1;
+        }
+        
+        .theme-toggle .moon-icon {
+            right: 6px;
+            color: #6b7280;
+            opacity: 0;
+        }
+        
+        .dark .theme-toggle .sun-icon {
+            opacity: 0;
+        }
+        
+        .dark .theme-toggle .moon-icon {
+            opacity: 1;
+            color: #fbbf24;
+        }
+        
+        /* Image placeholder */
+        .image-placeholder {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        .dark .image-placeholder {
+            background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+            background-size: 200% 100%;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body class="font-inter bg-white text-gray-900 dark:text-gray-100">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-200 transition-all duration-300" id="navbar">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 dark:bg-gray-900/90 dark:border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <a href="index.html" class="text-2xl font-bold text-blue-900">
+                    <a href="index.html" class="font-montserrat font-bold text-xl text-blue-900 dark:text-blue-100">
                         <i class="fas fa-code mr-2"></i>DevPortfolio
                     </a>
                 </div>
@@ -78,31 +228,40 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="index.html" class="text-blue-900 border-b-2 border-blue-900 px-3 py-2 text-sm font-medium">Home</a>
-                        <a href="about.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition-colors duration-200">About</a>
-                        <a href="projects.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition-colors duration-200">Projects</a>
-                        <a href="blog.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition-colors duration-200">Blog</a>
-                        <a href="contact.html" class="text-gray-700 hover:text-blue-900 px-3 py-2 text-sm font-medium transition-colors duration-200">Contact</a>
+                        <a href="index.html" class="text-blue-900 dark:text-blue-100 border-b-2 border-blue-900 dark:border-blue-100 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">About</a>
+                        <a href="projects.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">Projects</a>
+                        <a href="blog.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">Blog</a>
+                        <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 px-3 py-2 text-sm font-medium transition-colors">Contact</a>
                     </div>
                 </div>
                 
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button type="button" class="text-gray-700 hover:text-blue-900 focus:outline-none focus:text-blue-900" id="mobile-menu-button">
-                        <i class="fas fa-bars text-xl"></i>
+                <!-- Theme Toggle and Mobile Menu Button -->
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <i class="fas fa-moon moon-icon"></i>
                     </button>
+                    
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 focus:outline-none focus:text-blue-900 dark:focus:text-blue-100">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         
         <!-- Mobile Navigation -->
-        <div class="md:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
-                <a href="index.html" class="text-blue-900 block px-3 py-2 text-base font-medium">Home</a>
-                <a href="about.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">About</a>
-                <a href="projects.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Projects</a>
-                <a href="blog.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Blog</a>
-                <a href="contact.html" class="text-gray-700 hover:text-blue-900 block px-3 py-2 text-base font-medium">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-blue-900 dark:text-blue-100 block px-3 py-2 text-base font-medium">Home</a>
+                <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">About</a>
+                <a href="projects.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">Projects</a>
+                <a href="blog.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">Blog</a>
+                <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:text-blue-900 dark:hover:text-blue-100 block px-3 py-2 text-base font-medium transition-colors">Contact</a>
             </div>
         </div>
     </nav>
@@ -395,6 +554,53 @@
     
     <!-- Custom JS -->
     <script>
+        // Theme management
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to system preference
+        const getStoredTheme = () => localStorage.getItem('theme');
+        const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        
+        // Apply theme
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                html.classList.remove('light');
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+                html.classList.add('light');
+            }
+        };
+        
+        // Initialize theme
+        const initializeTheme = () => {
+            const storedTheme = getStoredTheme();
+            const systemTheme = getSystemTheme();
+            const theme = storedTheme || systemTheme;
+            applyTheme(theme);
+        };
+        
+        // Toggle theme
+        const toggleTheme = () => {
+            const currentTheme = html.classList.contains('dark') ? 'light' : 'dark';
+            applyTheme(currentTheme);
+            localStorage.setItem('theme', currentTheme);
+        };
+        
+        // Event listeners
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!getStoredTheme()) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+        
+        // Initialize theme on page load
+        initializeTheme();
+        
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -405,11 +611,11 @@
         
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
+            const navbar = document.querySelector('nav');
             if (window.scrollY > 50) {
-                navbar.classList.add('bg-white/95');
+                navbar.classList.add('bg-white/95', 'dark:bg-gray-900/95');
             } else {
-                navbar.classList.remove('bg-white/95');
+                navbar.classList.remove('bg-white/95', 'dark:bg-gray-900/95');
             }
         });
         
