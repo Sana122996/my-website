@@ -5,22 +5,14 @@ backend:
   client_id: Ov23lijUlj5fjBZFU3sj
 
 media_folder: "assets/images"
-public_folder: "/assets/images"
+public_folder: "/my-website/assets/images"
 
 collections:
-  - name: "pages"
-    label: "页面"
-    files:
-      - file: "index.html"
-        label: "首页（英文）"
-        name: "home_en"
-        fields:
-          - { label: "标题", name: "title", widget: "string" }
-          - { label: "内容", name: "body", widget: "markdown" }
-      - file: "index-zh.html"
-        label: "首页（中文）"
-        name: "home_zh"
-        fields:
-          - { label: "标题", name: "title", widget: "string" }
-          - { label: "内容", name: "body", widget: "markdown" }
-      # 其余页面同理，可继续添加
+  - name: "blog"
+    label: "Blog"
+    folder: "blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
