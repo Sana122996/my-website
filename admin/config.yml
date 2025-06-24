@@ -3,9 +3,10 @@ backend:
   repo: Sana122996/my-website
   branch: main
   client_id: Ov23lijUlj5fjBZFU3sj
+  client_secret: 5081fe116ef97ea40387cd15d5f95e3e485203f4
 
 media_folder: "assets/images"
-public_folder: "/my-website/assets/images"
+public_folder: "/assets/images"
 
 collections:
   - name: "blog"
